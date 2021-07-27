@@ -1,17 +1,54 @@
-<?php include('shared/header.php') ?>
+<?php
+
+include('shared/header.php'); 
+
+$id = isset($_GET["id"]) ? $_GET["id"] :0;
+$username = "";
+$password = "";
+$nombre = "";
+$mail = "";
+$phone = "";
+$password_conf = "";
+
+include('db.php'); 
+    $q = "SELECT id,nombre,mail,telefono,username FROM usuario WHERE id = $id";
+    $response = $connection->query($q);
+    if ($response->num_rows > 0) {
+      while($row = $response->fetch_assoc()) {
+        $username = $row['username'];
+        $nombre = $row['nombre'];
+        $mail = $row['mail'];
+        $phone =$row['telefono'];          
+      }
+  }
+
+?>
+
 <div class="container">
+  <?php
+
+    if($id===0){
+      echo "<h1>Crear</h1>";
+    }
+    else{
+      echo "<h1>Editar</h1>";
+    }
+  
+  
+  ?>
 <form action="validations/crear-valid.php" method="post" class="row g-3">
 <div class="col-12">
+    <input type="hidden" name="id" value="<?php echo $id;?>">
     <label for="nombre" class="form-label">Nombre y Apellidos</label>
-    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="">
+    <input type="text" value="<?php echo $nombre;?>"name="nombre" class="form-control" id="nombre" placeholder="">
   </div>
   <div class="col-md-6">
     <label for="inputEmail4" class="form-label">Email</label>
-    <input type="email" name="mail" class="form-control" id="inputEmail4">
+    <input type="email" value="<?php echo $mail;?>" name="mail" class="form-control" id="inputEmail4">
   </div>
   <div class="col-md-6">
     <label for="phone" class="form-label">Telefono</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="">
+    <input type="text" class="form-control" value="<?php echo $phone;?>" id="phone" name="phone" placeholder="">
   </div>
   <div class="col-md-6">
     <label for="inputPassword4" class="form-label">Password</label>
@@ -24,7 +61,7 @@
 
   <div class="col-md-6">
     <label for="username" class="form-label">Username</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="">
+    <input type="text" class="form-control" value="<?php echo $username;?>" id="username" name="username" placeholder="">
   </div>
 
   <div class="col-12">

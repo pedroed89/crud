@@ -1,7 +1,12 @@
 <?php
 
 include('../db.php');
-$id = 0;
+$id = $_POST['id'];
 $query = "delete from usuario where id = $id";
 $response = $connection->query($query);
+
+$mensaje = "Se ha eliminado el elemento";
+
+header("location:../index.php");
+
 ?>

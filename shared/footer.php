@@ -32,6 +32,7 @@
 
 
       function clickHandler(e){
+        e.preventDefault();
         swal({
           title: "Are you sure?",
           text: "You will not be able to recover this imaginary file!"+ e.target.id,
@@ -45,13 +46,16 @@
         },
         function(isConfirm) {
           if (isConfirm) {
+            let form = document.getElementById('deleteForm'+e.target.id.replace('delete',''));
+            form.submit();
             swal("Deleted!", "Your imaginary file has been deleted.", "success");
           } else {
             swal("Cancelled", "Your imaginary file is safe :)", "error");
           }
         });
-        console.log("click",e.target.id);
       }
     </script>
   </body>
 </html>
+
+
