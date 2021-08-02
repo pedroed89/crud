@@ -9,14 +9,14 @@ $cantidad = "";
 $categoria = "";
 $descripcion = "";
 include('db.php'); 
-    $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria FROM producto WHERE id = $id";
+    $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria_id FROM producto WHERE id = $id";
     $response = $connection->query($q);
     if ($response->num_rows > 0) {
       while($row = $response->fetch_assoc()) {
         $cantidad = $row['cantidad'];
         $precio = $row['precio'];
         $nombre = $row['nombre'];
-        $categoria =$row['categoria']; 
+        $categoria =$row['categoria_id']; 
         $descripcion =$row['descripcion'];          
       }
   }

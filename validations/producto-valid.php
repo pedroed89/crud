@@ -10,11 +10,11 @@ $cantidad = $_POST['cantidad'];
 $descripcion = $_POST['descripcion'];
 $categoria = $_POST['categoria'];
 if($id == 0){
-    $query =  "INSERT INTO `producto` (`id`, `nombre`, `precio`, `cantidad`, `descripcion`, `categoria`) VALUES (null,'".$nombre."','".$precio."','$cantidad','$descripcion','$categoria')";
+    $query =  "INSERT INTO `producto` (`id`, `nombre`, `precio`, `cantidad`, `descripcion`, `categoria_id`) VALUES (null,'".$nombre."','".$precio."','$cantidad','$descripcion','$categoria')";
 }
 else{
     //update
-    $query = "UPDATE `producto` SET `nombre` = '$nombre',`precio` = '$precio',`cantidad` = '$cantidad',`descripcion` = '$descripcion',`categoria` = '$categoria' WHERE `producto`.`id` = $id";
+    $query = "UPDATE `producto` SET `nombre` = '$nombre',`precio` = '$precio',`cantidad` = '$cantidad',`descripcion` = '$descripcion',`categoria_id` = '$categoria' WHERE `producto`.`id` = $id";
 }
 
 $connection->query($query);

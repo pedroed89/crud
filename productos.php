@@ -19,7 +19,7 @@ include('shared/header.php');
   <tbody>
   <?php
     include('db.php'); 
-    $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria FROM producto";
+    $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria_id FROM producto";
     $response = $connection->query($q);
 
     if ($response->num_rows > 0) {
@@ -29,7 +29,7 @@ include('shared/header.php');
             <td>'.$row["cantidad"].'</td>
             <td>'.$row["precio"].'</td>
             <td>'.$row["descripcion"].'</td>
-            <td>'.$row["categoria"].'</td>
+            <td>'.$row["categoria_id"].'</td>
             <td style="display:flex">
             <form action="crear-producto.php" method="get">
             <input type="hidden" value="'.$row["id"].'" name="id">
