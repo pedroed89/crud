@@ -54,6 +54,13 @@
           }
         });
       }
+
+      function filtrar_func(event){
+        event.preventDefault();
+        var selectedValue = document.querySelector('input[name="criterio"]:checked').id  
+        document.getElementById('criterioValor').value = selectedValue;
+        document.getElementById('filtrarForm').submit();
+      }
     </script>
   </body>
 </html>

@@ -5,6 +5,19 @@ include('shared/header.php');
   <h1>Productos</h1>
   <!-- Flexbox container for aligning the toasts -->
   <a href="crear-producto.php" class="btn btn-primary">Crear</a>
+  <br>
+  <form id="filtrarForm" action="productos.php" method="get">
+    <label for="desde">Desde</label>
+    <input type="text" name="desde" id="desde" value="<?php echo isset($_GET["desde"])?$_GET["desde"]:'';  ?>">
+    <label for="hasta">Hasta</label>
+    <input type="text" name="hasta" id="hasta" value="<?php echo isset($_GET["hasta"])?$_GET["hasta"]:'';  ?>">
+    <label for="cantidad">Cantidad</label>
+    <input type="radio" checked="checked" name="criterio" id="cantidad">
+    <label for="precio">Precio</label>
+    <input type="radio" name="criterio" id="precio">
+    <input type="hidden" name="criterioValor" id="criterioValor">
+    <button type="submit" onclick="filtrar_func(event)" id="filtrar">Filtrar</button>
+  </form>
   <table class="table">
   <thead>
     <tr>
@@ -20,6 +33,20 @@ include('shared/header.php');
   <?php
     include('db.php'); 
     $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria_id FROM producto";
+    
+    if(isset($_GET["desde"]) && isset($_GET["hasta"]) && isset($_GET["criterio"])){
+      $desde = $_GET["desde"];
+      $hasta = $_GET["hasta"];
+      $criterio = $_GET["criterioValor"];
+      if($criterio === "cantidad"){
+        $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria_id FROM producto where cantidad>=$desde and cantidad<=$hasta";
+      }
+      else{
+        $q = "SELECT id,nombre,cantidad,precio,descripcion,categoria_id FROM producto where precio>=$desde and precio<=$hasta";
+      }
+      
+      echo $criterio;
+    }
     $response = $connection->query($q);
 
     if ($response->num_rows > 0) {
@@ -51,3 +78,4 @@ include('shared/header.php');
   </tbody>
 </table>
   </div>
+  <?php include('shared/footer.php') ?>
