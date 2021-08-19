@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +13,15 @@
     <title>Crud</title>
   </head>
   <body>
+  <?php 
+
+session_start();
+if(!isset($_SESSION['login'])){
+  $_SESSION['login'] = false;
+  $_SESSION['username'] = 'Invitado';
+}
+
+?>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">CRUD</a>
@@ -22,14 +33,28 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/crud">Usuarios</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="productos.php">Productos</a>
-        </li>
+        <?php 
+          if($_SESSION['login'] === true){
+            echo '<li class="nav-item">
+            <a class="nav-link" href="productos.php">Productos</a>
+          </li>';
+          }
+        
+        ?>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
         <button class="btn btn-outline-success" type="button">Registro</button>
+        <a href="./validations/login.php" class="btn btn-outline-success" type="button">
+        <?php 
+    
+        if($_SESSION['login']){
+          echo('Logout');
+        }else{
+          echo('Login');
+        }
+        ?></a>
       </form>
     </div>
   </div>

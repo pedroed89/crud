@@ -11,8 +11,24 @@ $mail = $_POST['mail'];
 $phone = $_POST['phone'];
 $password_conf = $_POST['password_conf'];
 
+$msg = "";
+// If upload button is clicked ...
+$image = $_FILES['image']['name'];
+    // Get text
+
+    // image file directory
+$target = "../upload/".basename($image);
+
+    // execute query
+
+if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+    $msg = "Image uploaded successfully";
+}else{
+    $msg = "Failed to upload image";
+}
+
 if($id == 0){
-    $query =  "INSERT INTO `usuario` (`id`, `nombre`, `mail`, `telefono`, `username`, `password`) VALUES (null,'".$nombre."','".$mail."','$phone','$username','$password')";
+    $query =  "INSERT INTO `usuario` (`id`, `nombre`, `mail`, `telefono`, `username`, `password`,`imagen`) VALUES (null,'".$nombre."','".$mail."','$phone','$username','$password','$image')";
 }
 else{
     //update

@@ -36,7 +36,7 @@ include('db.php');
   
   
   ?>
-<form action="validations/crear-valid.php" method="post" class="row g-3">
+<form action="validations/crear-valid.php" method="post" class="row g-3" enctype="multipart/form-data">
 <div class="col-12">
     <input type="hidden" name="id" value="<?php echo $id;?>">
     <label for="nombre" class="form-label">Nombre y Apellidos</label>
@@ -63,6 +63,9 @@ include('db.php');
     <label for="username" class="form-label">Username</label>
     <input type="text" class="form-control" value="<?php echo $username;?>" id="username" name="username" placeholder="">
   </div>
+  <div class="col-md-6">
+  	  <input class="form-control" type="file" name="image">
+  	</div>
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Guardar</button>
