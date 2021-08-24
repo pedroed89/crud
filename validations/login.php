@@ -5,13 +5,17 @@ session_start();
 // si las credenciales son corectas
 
 if($_SESSION['login'] === false){
-    $username = "Admin";
-    $_SESSION['username'] = $username;
-    $_SESSION['login'] = true;
+    if(isset($_POST['email'])){
+        $email = $_POST['email'];
+        $_SESSION['username'] = $email;
+        $_SESSION['login'] = true;
+        header('Location: ../index.php');
+    }
 }else{
     $_SESSION['username'] = 'Invitado';
     $_SESSION['login'] = false;
+    header('Location: ../index.php');
 }
-header('Location: ../index.php');
+
 
 ?>
